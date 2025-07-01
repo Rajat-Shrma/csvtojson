@@ -1,3 +1,4 @@
+
 import streamlit as st
 import pandas as pd
 import os
@@ -6,7 +7,7 @@ import io
 import zipfile
 import tempfile
 import shutil
-import google.generativeai as genai 
+import google.generativeai as genai
 
 # Configure the Google Generative AI API with the provided key.
 # In a production application, it's recommended to use Streamlit secrets or environment variables
@@ -85,6 +86,9 @@ if uploaded_files:
         total_rows_processed = 0
         all_json_files_for_zip = []
 
+        # Initialize the Gemini model once outside the loop for efficiency
+        model = genai.GenerativeModel('gemini-2.5-flash') # CORRECTED: Initialize the model here
+
         # Iterate through each uploaded CSV file
         for uploaded_file in uploaded_files:
             st.subheader(f"Processing: {uploaded_file.name}")
@@ -120,11 +124,8 @@ if uploaded_files:
                     JSON Schema: {json.dumps(json_template, indent=2)}"""
 
                     try:
-                        # Make the API call to the Gemini model
-                        response = genai.models.generate_content(
-                            model="gemini-2.5-flash",
-                            contents=prompt
-                        )
+                        # Make the API call to the Gemini model using the initialized model object
+                        response = model.generate_content(contents=prompt) # CORRECTED: Call generate_content on the model object
 
                         responsetxt = response.text
                         # Attempt to parse the Gemini response as JSON
