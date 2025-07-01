@@ -6,7 +6,7 @@ import io
 import zipfile
 import tempfile
 import shutil
-from google import genai
+import google.generativeai as genai 
 
 # Configure the Google Generative AI API with the provided key.
 # In a production application, it's recommended to use Streamlit secrets or environment variables
