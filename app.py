@@ -45,7 +45,6 @@ json_template = {
                 }
             ]
         }
-        //more tables
     ]
 }
 
