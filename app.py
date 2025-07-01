@@ -12,7 +12,7 @@ import google.generativeai as genai
 # Configure the Google Generative AI API with the provided key.
 # In a production application, it's recommended to use Streamlit secrets or environment variables
 # instead of hardcoding the API key directly in the code.
-API_KEY = "AIzaSyAJeh9r_aWHBp2WxdtLdqcEr62DFpxfJSI"
+API_KEY = "AIzaSyDltR5gKamrkUZKeNcI2YHrArHwfEoLuYQ"
 genai.configure(api_key=API_KEY)
 
 # Set up the Streamlit page configuration
