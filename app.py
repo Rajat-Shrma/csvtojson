@@ -1,4 +1,4 @@
-
+%%writefile app.py
 import streamlit as st
 import pandas as pd
 import os
@@ -87,7 +87,7 @@ if uploaded_files:
         all_json_files_for_zip = []
 
         # Initialize the Gemini model once outside the loop for efficiency
-        model = genai.GenerativeModel('gemini-2.5-flash') # CORRECTED: Initialize the model here
+        model = genai.GenerativeModel('gemini-2.5-flash')
 
         # Iterate through each uploaded CSV file
         for uploaded_file in uploaded_files:
@@ -125,9 +125,14 @@ if uploaded_files:
 
                     try:
                         # Make the API call to the Gemini model using the initialized model object
-                        response = model.generate_content(contents=prompt) # CORRECTED: Call generate_content on the model object
+                        response = model.generate_content(contents=prompt)
 
                         responsetxt = response.text
+                        # --- CORRECTED: Strip markdown code block fences ---
+                        if responsetxt.startswith("```json") and responsetxt.endswith("```"):
+                            responsetxt = responsetxt[len("```json"): -len("```")].strip()
+                        # --- END CORRECTION ---
+
                         # Attempt to parse the Gemini response as JSON
                         try:
                             generated_json_data = json.loads(responsetxt)
