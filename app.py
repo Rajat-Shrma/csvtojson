@@ -8,25 +8,15 @@
     import shutil
     import google.generativeai as genai
     import time
-    import gc # Import garbage collection module
+    import gc
 
-    # Configure the Google Generative AI API with the provided key.
-    # IMPORTANT: For production, use Streamlit Secrets (st.secrets) instead of hardcoding.
-    # Example: API_KEY = st.secrets["GEMINI_API_KEY"]
-    API_KEY = "AIzaSyAJeh9r_aWHBp2WxdtLdqcEr62DFpxfJSI"
+
+    API_KEY = "AIzaSyAoC0cNyI_pHM793KDg-0NO6HEji1ZZIZc"
     genai.configure(api_key=API_KEY)
-
-    # Set up the Streamlit page configuration
     st.set_page_config(page_title="CSV to JSON Converter", layout="wide")
 
     st.title("Medical Report CSV to JSON Converter")
-    st.write(
-        "Upload your CSV annotation files. This app will iterate through each row, "
-        "extract the 'table' data, use the Gemini API to structure it into JSON, "
-        "and then provide a ZIP file containing all the generated JSONs."
-    )
 
-    # Define the JSON template as provided by the user.
     json_template = {
         "image_name": "",
         "tables": [
@@ -51,14 +41,14 @@
 
     # Streamlit file uploader to accept multiple CSV files.
     uploaded_files = st.file_uploader(
-        "Upload CSV annotation files (select multiple files)",
+        "Upload CSV annotation file",
         type="csv",
         accept_multiple_files=True
     )
 
     # Process files only if they have been uploaded
     if uploaded_files:
-        if st.button("Process Files"):
+        if st.button("Process File"):
             # Create a temporary directory to store the generated JSON files.
             temp_dir = tempfile.mkdtemp()
             json_output_dir = os.path.join(temp_dir, "generated_jsons")
