@@ -10,7 +10,7 @@ import google.generativeai as genai
 import time
 import gc
 
-API_KEY = "AIzaSyAVWhjVKyStphlkM2oWYEQyNd3wWOezq9Q"
+API_KEY = "AIzaSyDnAX7f7Vx4UuwUZZ65UUm1DDQl_Ks1-DU"
 genai.configure(api_key=API_KEY)
 st.set_page_config(page_title="CSV to JSON Converter", layout="wide")
 
